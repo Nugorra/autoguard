@@ -43,11 +43,11 @@ jobs:
                   mkdir -p bundle
                   cp target/x86_64-pc-windows-gnu/release/*.exe bundle/
 
-                  # DLLs
-                  mingw64-ldd -R target/x86_64-pc-windows-gnu/release/*.exe \
-                    | grep mingw64 \
-                    | awk '{print $3}' \
-                    | xargs -I{} cp {} bundle/
+                  # Copy only required DLLs using ntldd + cygpath
+                  ntldd -R target/x86_64-pc-windows-gnu/release/*.exe \
+                      | grep mingw64 \
+                      | awk '{print $3}' \
+                      | xargs -I{} cp "$(cygpath -u "{}")" bundle/
 
                   # GLib tools (needed for DBus)
                   cp /mingw64/bin/gdbus.exe bundle/
