@@ -45,6 +45,9 @@ jobs:
                   # DLLs
                   cp /mingw64/bin/*.dll bundle/
 
+                  # GLib tools (needed for DBus)
+                  cp /mingw64/bin/gdbus.exe bundle/
+
                   # GTK runtime folders
                   mkdir -p bundle/share
                   cp -r /mingw64/share/glib-2.0 bundle/share/
