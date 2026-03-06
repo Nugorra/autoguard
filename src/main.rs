@@ -1,3 +1,5 @@
+// Suppresses the console window in Windows
+#![windows_subsystem = "windows"]
 mod helpers;
 mod actions;
 mod wireguard_config;
